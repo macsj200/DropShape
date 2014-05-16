@@ -33,6 +33,8 @@ public class DropShapeMain {
 		return image;
 	}
 
+	//test
+	
 	public ArrayList<ShapeWrapper> getShapes(){
 		return shapes;
 	}
