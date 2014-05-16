@@ -35,6 +35,8 @@ public class DropShapeMain {
 
 	//test
 	
+	//test 2
+	
 	public ArrayList<ShapeWrapper> getShapes(){
 		return shapes;
 	}
