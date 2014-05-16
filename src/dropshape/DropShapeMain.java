@@ -52,6 +52,10 @@ public class DropShapeMain {
 
 		addShape(shape);
 	}
+	
+	public void cleanupShapes(){
+		
+	}
 
 
 	public void startGameLoop(){
