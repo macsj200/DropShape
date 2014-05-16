@@ -65,7 +65,9 @@ public class DropShapeMain {
 				boolean somethingChanged = false;
 
 				while(running){
-					absolutePos = MouseInfo.getPointerInfo().getLocation();
+					//TODO set absolutePos to mouse coordinates
+					
+					absolutePos = null;
 
 					pos = new Point((int) (absolutePos.getX() - p.getCanvasPanel().getLocationOnScreen().getX()), 
 							(int) (absolutePos.getY() - p.getCanvasPanel().getLocationOnScreen().getY()));
