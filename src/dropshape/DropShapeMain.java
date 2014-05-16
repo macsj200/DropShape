@@ -115,7 +115,7 @@ public class DropShapeMain {
 					}
 
 					if(offender == null && oldOffender != null){
-						oldOffender.setColor(Color.black);
+						oldOffender.setColor(Color.red);
 
 						oldOffender.drawCrap();
 						somethingChanged = true;
