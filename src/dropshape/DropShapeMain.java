@@ -15,6 +15,7 @@ public class DropShapeMain {
 	private BufferedImage image;
 	private ArrayList<ShapeWrapper> shapes;
 	private boolean running;
+	private int hitCount;
 
 	public DropShapeMain(Playplace p){
 		this.p = p;
@@ -61,8 +62,9 @@ public class DropShapeMain {
 	public void startGameLoop(){
 
 
-
+		
 		running = true;
+		hitCount = 0;
 		(new Thread(){
 			public void run(){
 
@@ -120,7 +122,8 @@ public class DropShapeMain {
 
 					if(offender == null && oldOffender != null){
 						oldOffender.setColor(Color.red);
-
+						hitCount++;
+						System.out.println(hitCount);
 						oldOffender.drawCrap();
 						somethingChanged = true;
 					}
