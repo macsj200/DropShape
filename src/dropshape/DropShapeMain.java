@@ -5,6 +5,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
@@ -43,15 +44,24 @@ public class DropShapeMain {
 		}
 	}
 
+	public void generateShape() {
+		ShapeWrapper shape = new ShapeWrapper(new Rectangle2D.Double(0,0,50,60));
+
+		shape.setPosition(new Point((int) (Math.random() * (p.getCanvasPanel().getWidth() - 
+				shape.getShape().getBounds().getWidth()) + 1) + 1,0));
+
+		addShape(shape);
+	}
+
+
 	public void startGameLoop(){
-		ShapeWrapper tester = new ShapeWrapper(new Rectangle2D.Double(0,0,50,60));
 
-		tester.setPosition(new Point(50,50));
 
-		addShape(tester);
+
 		running = true;
 		(new Thread(){
 			public void run(){
+
 				Point absolutePos;
 
 				Point pos;
@@ -65,8 +75,22 @@ public class DropShapeMain {
 				boolean somethingChanged = false;
 
 				while(running){
-					//TODO set absolutePos to mouse coordinates
-					
+					try {
+						SwingUtilities.invokeAndWait(new Runnable(){
+							public void run(){
+								if(System.currentTimeMillis() % 2000 == 0){
+									generateShape();
+								}			
+							}
+						});
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					absolutePos = MouseInfo.getPointerInfo().getLocation();
 
 					pos = new Point((int) (absolutePos.getX() - p.getCanvasPanel().getLocationOnScreen().getX()), 
@@ -101,16 +125,16 @@ public class DropShapeMain {
 					//TODO change logic to draw every ten seconds or something
 
 
-					if(System.currentTimeMillis() % 100 == 0){
+					if(System.currentTimeMillis() % 65 == 0){
 						shiftShapes();
 						somethingChanged = true;
 					}
-					
+
 
 					if(somethingChanged){
 						redrawEverything();
 					}
-					
+
 					somethingChanged = false;
 				}
 			}
